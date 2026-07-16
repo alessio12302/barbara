@@ -7,7 +7,7 @@
 		
 	
 	
-		Attivare 7,00% cashback
+		
 	
  charset="UTF-8">
     <meta
@@ -16,102 +16,70 @@
 		
 	
 	
-		Attivare 7,00% cashback
 	
  name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accesso Domotico - Roseto degli Abruzzi</title>
+    <title>Accesso Domotico</title>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Immagine di sfondo indicativa */
-            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Roseto_degli_Abruzzi_lungomare.jpg') no-repeat center center fixed;
-            background-size
-	
-	
-		
-	
-	
-		Attivare fino a 3,50% cashback
-	
-: cover;
+        body, html { height: 100%; margin: 0; padding: 0; font-family: sans-serif; overflow: hidden; }
+
+        /* Stile per il video di sfondo */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Mette il video dietro tutto il resto */
+            object-fit: cover;
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.85);
+        .container { 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8);
             padding: 40px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        h1 { color: #333; margin-bottom: 30px; }
-
-        .btn {
-            display: block;
-            width: 250px;
-            margin: 15px auto;
-            padding: 15px;
-            font-size
+        .btn { display: block; width: 280px; margin: 15px auto; padding: 15px; font-size
 	
 	
 		
 	
 	
-		Attivare fino a 3,50% cashback
 	
-: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        .btn-portone { background-color: #007bff; color: white; }
-        .btn-appartamento { background-color: #28a745; color: white; }
-
-        .btn:hover { transform: scale(1.05); }
+: 16px; cursor: pointer; border: none; border-radius: 8px; color: white; transition: 0.2s; }
+        .btn-portone { background-color: #007bff; }
+        .btn-app { background-color: #28a745; }
+        .btn:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Benvenuti</h1>
-    
-    <button class="btn btn-portone" onclick="apriPortone()">Accedi al portone</button>
-    <button class="btn btn-appartamento" onclick="apriAppartamento()">Accedi all'appartamento</button>
-</div>
+    <video autoplay muted loop id="bg-video">
+        <source src="Sfondo.mp4" type="video/mp4">
+        Il tuo browser non supporta i video HTML5.
+    </video>
 
-<script>
-    // 1. Funzione per IFTTT
-    function apriPortone() {
-        const iftttUrl = "https://maker.ifttt.com/trigger/NOME_EVENTO/with/key/TUA_CHIAVE";
-        fetch(iftttUrl, { mode: 'no-cors' })
-            .then(() => alert("Segnale inviato: Il portone si sta aprendo."))
-            .catch(err => console.error("Errore:", err));
-    }
+    <div class="container">
+        <h1>Benvenuti</h1>
+        <button class="btn btn-portone" onclick="inviaComando('URL_IFTTT_PORTONE')">Accedi al portone</button>
+        <button class="btn btn-app" onclick="inviaComando('URL_IFTTT_TEDEE')">Accedi all'appartamento</button>
+    </div>
 
-    // 2. Funzione per API Tedee Go
-    function apriAppartamento() {
-        const tedeeUrl = "https://api.tedee.com/v1.0/my/lock/unlock"; // Esempio endpoint
-        const token = "TUO_TOKEN_API";
-        
-        fetch(tedeeUrl, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "deviceId": "ID_DEL_TUO_TEDEE" })
-        })
-        .then(response => alert("Comando inviato al Tedee Go"))
-        .catch(err => console.error("Errore:", err));
-    }
-</script>
+    <script>
+        function inviaComando(url) {
+            fetch(url, { mode: 'no-cors' })
+                .then(() => alert("Comando inviato!"))
+                .catch(err => alert("Errore nell'invio."));
+        }
+    </script>
 
 </body>
 </html>
