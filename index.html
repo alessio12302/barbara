@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta
-	
-	
-		
-	
-	
-		
-	
- charset="UTF-8">
-    <meta
-	
-	
-		
-	
-	
-	
- name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accesso Domotico</title>
     <style>
-        body, html { height: 100%; margin: 0; padding: 0; font-family: sans-serif; overflow: hidden; }
+        /* Reset e configurazione base */
+        body, html { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            overflow: hidden; 
+        }
 
-        /* Stile per il video di sfondo */
+        /* Video centrato e responsive */
         #bg-video {
             position: fixed;
-            right: 0;
-            bottom: 0;
+            top: 50%;
+            left: 50%;
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -1; /* Mette il video dietro tutto il resto */
+            z-index: -1;
+            transform: translate(-50%, -50%); 
             object-fit: cover;
         }
 
+        /* Contenitore pulsanti */
         .container { 
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 85%;
+            max-width: 400px;
+            backdrop-filter: blur(10px); /* Effetto vetro sfocato */
         }
 
-        .btn { display: block; width: 280px; margin: 15px auto; padding: 15px; font-size
-	
-	
-		
-	
-	
-	
-: 16px; cursor: pointer; border: none; border-radius: 8px; color: white; transition: 0.2s; }
+        h1 { color: #333; margin-bottom: 25px; }
+
+        .btn { 
+            display: block; 
+            width: 100%; 
+            margin: 15px 0; 
+            padding: 18px; 
+            font-size: 16px; 
+            font-weight: bold;
+            cursor: pointer; 
+            border: none; 
+            border-radius: 12px; 
+            color: white; 
+            transition: transform 0.2s, opacity 0.2s; 
+        }
+
         .btn-portone { background-color: #007bff; }
         .btn-app { background-color: #28a745; }
-        .btn:active { transform: scale(0.98); }
+        .btn:active { transform: scale(0.95); opacity: 0.9; }
     </style>
 </head>
 <body>
 
-    <video autoplay muted loop id="bg-video">
+    <!-- Il video deve avere playsinline per funzionare su iPhone -->
+    <video autoplay muted loop playsinline id="bg-video">
         <source src="Sfondo.mp4" type="video/mp4">
-        Il tuo browser non supporta i video HTML5.
+        Il tuo browser non supporta la riproduzione video.
     </video>
 
     <div class="container">
@@ -75,11 +81,16 @@
 
     <script>
         function inviaComando(url) {
+            // Esegue la chiamata all'URL IFTTT configurato
             fetch(url, { mode: 'no-cors' })
-                .then(() => alert("Comando inviato!"))
-                .catch(err => alert("Errore nell'invio."));
+                .then(() => {
+                    alert("Comando inviato correttamente!");
+                })
+                .catch(err => {
+                    console.error("Errore:", err);
+                    alert("Errore nell'invio del comando.");
+                });
         }
     </script>
-
 </body>
 </html>
