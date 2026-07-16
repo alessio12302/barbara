@@ -1,0 +1,14 @@
+name: Apri Porta Tedee
+on:
+  repository_dispatch:
+    types: [trigger-apri] # Questo è il nome dell'evento che chiamerai dal tuo HTML
+
+jobs:
+  apri:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Esegui comando API
+        run: |
+          curl -X POST "https://api.tedee.com/v1.0/my/lock/unlock/ID_DEL_TUO_DISPOSITIVO" \
+          -H "Authorization: Bearer ${{ secrets.TEDEE_TOKEN }}" \
+          -H "Content-Type: application/json"
