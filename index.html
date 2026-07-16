@@ -74,41 +74,17 @@
     <div class="container">
         <h1>Benvenuti</h1>
         <button class="btn btn-portone" onclick="apriPortone()">Accedi al portone</button>
-        <button class="btn btn-app" onclick="apriAppartamento()">Accedi all'appartamento</button>
+        <!-- Inserisci il tuo link web Tedee qui sotto -->
+        <button class="btn btn-app" onclick="window.open('INSERISCI_QUI_IL_LINK_TEDEE', '_blank')">Accedi all'appartamento</button>
     </div>
 
     <script>
-        // Funzione per IFTTT
+        // Funzione per IFTTT (Portone)
         function apriPortone() {
             const url = "https://maker.ifttt.com/trigger/Portone_Affitti/with/key/gnYYkYK-CXpD4U-5ROjNSCKbsiN5HJ8k8dVPoQklN4U";
             fetch(url, { mode: 'no-cors' })
-                .then(() => alert("Prego, portone aperto!"))
-                .catch(() => alert("Errore invio comando portone."));
-        }
-
-        // Funzione per GitHub Actions (Tedee)
-        function apriAppartamento() {
-            const GITHUB_TOKEN = "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";
-            const REPO = "alessio12302/barbara"; // Es: mario/casa-domotica
-            
-            fetch(`https://api.github.com/repos/${REPO}/dispatches`, {
-                method: 'POST',
-                headers: {
-                    "Authorization": `token ${GITHUB_TOKEN}`,
-                    "Accept": "application/vnd.github.v3+json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ "event_type": "trigger-apri" })
-                "client_payload": { "unit": false, "integration": true }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Prego, appartamento sbloccato!");
-                } else {
-                    alert("Errore: verifica il token o la repository.");
-                }
-            })
-            .catch(err => console.error("Errore:", err));
+                .then(() => alert("Comando inviato!"))
+                .catch(() => alert("Errore di connessione."));
         }
     </script>
 </body>
