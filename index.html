@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta
+	
+	
+		
+	
+	
+		Attivare 7,00% cashback
+	
+ charset="UTF-8">
+    <meta
+	
+	
+		
+	
+	
+		Attivare 7,00% cashback
+	
+ name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso Domotico - Roseto degli Abruzzi</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Immagine di sfondo indicativa */
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Roseto_degli_Abruzzi_lungomare.jpg') no-repeat center center fixed;
+            background-size
+	
+	
+		
+	
+	
+		Attivare fino a 3,50% cashback
+	
+: cover;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        h1 { color: #333; margin-bottom: 30px; }
+
+        .btn {
+            display: block;
+            width: 250px;
+            margin: 15px auto;
+            padding: 15px;
+            font-size
+	
+	
+		
+	
+	
+		Attivare fino a 3,50% cashback
+	
+: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-portone { background-color: #007bff; color: white; }
+        .btn-appartamento { background-color: #28a745; color: white; }
+
+        .btn:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Benvenuti</h1>
+    
+    <button class="btn btn-portone" onclick="apriPortone()">Accedi al portone</button>
+    <button class="btn btn-appartamento" onclick="apriAppartamento()">Accedi all'appartamento</button>
+</div>
+
+<script>
+    // 1. Funzione per IFTTT
+    function apriPortone() {
+        const iftttUrl = "https://maker.ifttt.com/trigger/NOME_EVENTO/with/key/TUA_CHIAVE";
+        fetch(iftttUrl, { mode: 'no-cors' })
+            .then(() => alert("Segnale inviato: Il portone si sta aprendo."))
+            .catch(err => console.error("Errore:", err));
+    }
+
+    // 2. Funzione per API Tedee Go
+    function apriAppartamento() {
+        const tedeeUrl = "https://api.tedee.com/v1.0/my/lock/unlock"; // Esempio endpoint
+        const token = "TUO_TOKEN_API";
+        
+        fetch(tedeeUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "deviceId": "ID_DEL_TUO_TEDEE" })
+        })
+        .then(response => alert("Comando inviato al Tedee Go"))
+        .catch(err => console.error("Errore:", err));
+    }
+</script>
+
+</body>
+</html>
