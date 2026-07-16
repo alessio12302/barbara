@@ -9,6 +9,6 @@ jobs:
     steps:
       - name: Esegui comando API
         run: |
-          curl -X POST "https://api.tedee.com/v1.0/my/lock/unlock/ID_DEL_TUO_DISPOSITIVO" \
+          curl -X POST "https://api.tedee.com/v1.0/my/lock/unlock/356538" \
           -H "Authorization: Bearer ${{ secrets.TEDEE_TOKEN }}" \
           -H "Content-Type: application/json"
