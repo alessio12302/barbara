@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accesso Domotico</title>
+    <title>Accesso Appartamento</title>
     <style>
         body, html { 
             height: 100%; 
@@ -72,7 +72,7 @@
     </video>
 
     <div class="container">
-        <h1>Benvenuti</h1>
+        <h1>Benvenuti a Roseto</h1>
         <button class="btn btn-portone" onclick="apriPortone()">Accedi al portone</button>
         <!-- Inserisci il tuo link web Tedee qui sotto -->
         <button class="btn btn-app" onclick="window.open('https://access.tedee.com/mi1WtXCvaki2SL6ZRWN7zxXybGXLw1Dr5EY1mGnAibwHveEHDkaeboEZzVapzjG.5f3x4BAX1AVtDibFgwB-Xg__', '_blank')">Accedi all'appartamento</button>
@@ -83,7 +83,7 @@
         function apriPortone() {
             const url = "https://maker.ifttt.com/trigger/Portone_Affitti/with/key/gnYYkYK-CXpD4U-5ROjNSCKbsiN5HJ8k8dVPoQklN4U";
             fetch(url, { mode: 'no-cors' })
-                .then(() => alert("Comando inviato!"))
+                .then(() => alert("Portone Aperto"))
                 .catch(() => alert("Errore di connessione."));
         }
     </script>
