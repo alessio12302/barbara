@@ -31,16 +31,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.25);
             padding: 30px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             width: 85%;
             max-width: 400px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         h1 { color: #333; margin-bottom: 25px; }
@@ -56,7 +56,17 @@
             border: none; 
             border-radius: 12px; 
             color: white; 
-            transition: transform 0.2s, opacity 0.2s; 
+            transition: transform 0.2s, opacity 0.2s;
+            animation:pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        .btn:hover {
+            animation: none; /* Ferma l'animazione al passaggio del mouse */
+            transform: scale(1.05);
         }
 
         .btn-portone { background-color: #007bff; }
