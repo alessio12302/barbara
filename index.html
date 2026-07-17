@@ -75,22 +75,14 @@
         .btn-portone { background-color: #007bff; }
         .btn-app { background-color: #28a745; }
         .btn-eventi { background-color: #6f42c1; }
+        .btn-citta { background-color: #444; margin: 8px 0; }
         .btn:active { transform: scale(0.95); opacity: 0.9; }
 
-        #menu-citta {
+        #lista-citta {
             margin-top: 15px;
             display: none;
-        }
-
-        #menu-citta select {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.9);
+            max-height: 300px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -110,17 +102,14 @@
         
         <button class="btn btn-eventi" onclick="mostraCitta()">Eventi</button>
 
-        <div id="menu-citta">
-            <select onchange="apriCalendario(this.value)">
-                <option value="">-- Seleziona una città --</option>
-                <option value="roseto.pdf">Roseto degli Abruzzi</option>
-                <option value="giulianova.pdf">Giulianova</option>
-                <option value="pineto.pdf">Pineto</option>
-                <option value="tortoreto.pdf">Tortoreto</option>
-                <option value="alba_adriatica.pdf">Alba Adriatica</option>
-                <option value="silvi.pdf">Silvi</option>
-                <option value="atri.pdf">Atri</option>
-            </select>
+        <div id="lista-citta">
+            <button class="btn btn-citta" onclick="apriCalendario('roseto.pdf')">Roseto degli Abruzzi</button>
+            <button class="btn btn-citta" onclick="apriCalendario('giulianova.pdf')">Giulianova</button>
+            <button class="btn btn-citta" onclick="apriCalendario('pineto.pdf')">Pineto</button>
+            <button class="btn btn-citta" onclick="apriCalendario('tortoreto.pdf')">Tortoreto</button>
+            <button class="btn btn-citta" onclick="apriCalendario('alba_adriatica.pdf')">Alba Adriatica</button>
+            <button class="btn btn-citta" onclick="apriCalendario('silvi.pdf')">Silvi</button>
+            <button class="btn btn-citta" onclick="apriCalendario('atri.pdf')">Atri</button>
         </div>
     </div>
 
@@ -133,15 +122,18 @@
         }
 
         function mostraCitta() {
-            const menu = document.getElementById('menu-citta');
-            menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+            const lista = document.getElementById('lista-citta');
+            lista.style.display = (lista.style.display === 'none' || lista.style.display === '') ? 'block' : 'none';
         }
 
         function apriCalendario(file) {
-            if (file) {
-                window.open(file, '_blank');
-                document.getElementById('menu-citta').style.display = 'none';
+            // Tenta l'apertura in una nuova scheda
+            var win = window.open(file, '_blank');
+            // Se il browser blocca l'apertura (comune su mobile), forza il reindirizzamento
+            if (!win) {
+                window.location.href = file;
             }
+            document.getElementById('lista-citta').style.display = 'none';
         }
     </script>
 </body>
