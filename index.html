@@ -24,6 +24,7 @@
             z-index: -1;
             transform: translate(-50%, -50%); 
             object-fit: contain;
+            background-color: #000;
         }
 
         .container { 
@@ -43,8 +44,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        h1 { color: #000; margin-bottom: 25px; 
-           font-weight: 800;}
+        h1 { color: #000; margin-bottom: 25px; font-weight: 800; }
 
         .btn { 
             display: block; 
@@ -58,21 +58,40 @@
             border-radius: 12px; 
             color: white; 
             transition: transform 0.2s, opacity 0.2s;
-            animation:pulse 3s infinite;
+            animation: pulse 3s infinite;
         }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
+
         .btn:hover {
-            animation: none; /* Ferma l'animazione al passaggio del mouse */
+            animation: none;
             transform: scale(1.05);
         }
 
         .btn-portone { background-color: #007bff; }
         .btn-app { background-color: #28a745; }
+        .btn-eventi { background-color: #6f42c1; }
         .btn:active { transform: scale(0.95); opacity: 0.9; }
+
+        #menu-citta {
+            margin-top: 15px;
+            display: none;
+        }
+
+        #menu-citta select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+        }
     </style>
 </head>
 <body>
@@ -84,18 +103,41 @@
 
     <div class="container">
         <h1>Benvenuti a Roseto(TE)</h1>
+        
         <button class="btn btn-portone" onclick="apriPortone()">Accedi al portone</button>
-        <!-- Inserisci il tuo link web Tedee qui sotto -->
+        
         <button class="btn btn-app" onclick="window.open('https://access.tedee.com/mi1WtXCvaki2SL6ZRWN7zxXybGXLw1Dr5EY1mGnAibwHveEHDkaeboEZzVapzjG.5f3x4BAX1AVtDibFgwB-Xg__', '_blank')">Accedi all'appartamento</button>
+        
+        <button class="btn btn-eventi" onclick="mostraCitta()">Eventi</button>
+
+        <div id="menu-citta">
+            <select onchange="apriCalendario(this.value)">
+                <option value="">-- Seleziona una città --</option>
+                <option value="roseto.pdf">Roseto degli Abruzzi</option>
+                <option value="giulianova.pdf">Giulianova</option>
+                <option value="pineto.pdf">Pineto</option>
+            </select>
+        </div>
     </div>
 
     <script>
-        // Funzione per IFTTT (Portone)
         function apriPortone() {
             const url = "https://maker.ifttt.com/trigger/Portone_Affitti/with/key/gnYYkYK-CXpD4U-5ROjNSCKbsiN5HJ8k8dVPoQklN4U";
             fetch(url, { mode: 'no-cors' })
                 .then(() => alert("Portone Aperto"))
                 .catch(() => alert("Errore di connessione."));
+        }
+
+        function mostraCitta() {
+            const menu = document.getElementById('menu-citta');
+            menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'block' : 'none';
+        }
+
+        function apriCalendario(file) {
+            if (file) {
+                window.open(file, '_blank');
+                document.getElementById('menu-citta').style.display = 'none';
+            }
         }
     </script>
 </body>
